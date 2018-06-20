@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 
-class Ball
+class ball
 {
 private:
 	sf::Vector2f position;
@@ -14,7 +14,7 @@ private:
 	float yVelocity = .2f;
 
 public:
-	Ball(float startX, float startY);
+	ball(float startX, float startY);
 
 	sf::FloatRect getPosition();
 

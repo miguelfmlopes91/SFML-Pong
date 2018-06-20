@@ -1,43 +1,55 @@
 #include "ball.h"
 
 
-
-ball::ball()
+ball::ball(float startX, float startY)
 {
+	position.x = startX;
+	position.y = startY;
+
+
+	ballShape.setSize(sf::Vector2f(10, 10));
+	ballShape.setPosition(position);
 }
 
-
-ball::~ball()
+sf::FloatRect ball::getPosition()
 {
+	return ballShape.getGlobalBounds();
 }
 
-sf::FloatRect Ball::getPosition()
+sf::RectangleShape ball::getShape()
 {
-	return sf::FloatRect();
+	return ballShape;
 }
 
-sf::RectangleShape Ball::getShape()
+float ball::getXVelocity()
 {
-	return sf::RectangleShape();
+	return xVelocity;
 }
 
-float Ball::getXVelocity()
+void ball::reboundSides()
 {
-	return 0.0f;
+	xVelocity = -xVelocity;
 }
 
-void Ball::reboundSides()
+void ball::reboundBatOrTop()
 {
+	position.y -= (yVelocity * 30);
+	//yVelocity = yVelocity*1.1;
+	yVelocity = -yVelocity;
 }
 
-void Ball::reboundBatOrTop()
+void ball::hitBottom()
 {
+	position.y = 1;
+	position.x = 500;
 }
 
-void Ball::hitBottom()
+void ball::update()
 {
-}
+	// Update the ball position variables
+	position.y += yVelocity;
+	position.x += xVelocity;
 
-void Ball::update()
-{
+	// Move the ball and the bat
+	ballShape.setPosition(position);
 }
